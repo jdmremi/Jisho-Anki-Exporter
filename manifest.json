@@ -1,0 +1,10 @@
+{
+    "name": "Jisho-Anki Exporter Rewrite",
+    "description": "Adds an export to Anki feature on jisho.org. **Requires AnkiConnect to be installed as an addon through Anki**",
+    "version": "1.0",
+    "manifest_version": 2,
+    "background": {
+        "scripts": ["./src/background.js", "./src/foreground.js"]
+    },
+    "permissions": ["tabs", "storage", "activeTab", "*://jisho.org/*", "*://jisho.org/search/*", "http://*/"]
+}
