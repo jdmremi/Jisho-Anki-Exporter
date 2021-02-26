@@ -1,6 +1,8 @@
 # Jisho-Anki Exporter
 
-- This is a project that I was commissioned to do that adds a button to dictionary entries on [jisho.org](https://jisho.org/) to export terms and related info to an Anki deck.
+- This is a Chrome extension that I was commissioned to do that adds a button to dictionary entries on [jisho.org](https://jisho.org/) to export terms and related info to an Anki deck.
+
+![Image](https://i.imgur.com/2ltozuT.png)
 
 # Installation
 
@@ -17,9 +19,16 @@
 
 - For some entries, if no example sentence exists, it will take the first example sentence on the page, even if it doesn't belong to the target word. 
 
+- Background is reporting some errors which need to be handled, such as...
+    - `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.`
+    - `No tab with id: ...`
+    - `Unchecked runtime.lastError: Cannot access contents of url "https://github.com/Vezqi/Jisho-Anki-Exporter". Extension manifest must request permission to access this host.`
+
 # To-do
 
-- Add audio
+- Add audio to cards.
+
+- If card creation succeeds, send card ID through socket to frontend and change text of export button to include whether card creation succeeded or not. (✅・❌) an dlog to console.
 
 # Collaboration
 
