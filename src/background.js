@@ -5,10 +5,11 @@ try {
     chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         chrome.tabs.get(tabId, (current) => {
             if (current.url.includes('jisho.org') && changeInfo.status === 'complete') {
-                chrome.tabs.executeScript(null, {
+                chrome.tabs.executeScript(null, { // Should this use tabId instead?
                     file: './src/foreground.js'
                 }, () => {
                     console.log('Injected foreground script.');
+                    // What if we put our onConnect#addListener event here?
                 });
             }
         });
@@ -18,14 +19,21 @@ try {
         console.log(`Connected to port: ${port.name}`);
         if (port.name === 'jisho-client') {
             port.onMessage.addListener(async (message) => {
-                console.log(message);
-                console.log(await Anki.ping());
-                await Anki.createNote(message);
+                if(message.type === 'addNote') {
+                    console.log(message);
+
+                    let createdNote = await Anki.createNote(message);
+                    
+                    console.log(createdNote);
+                    port.postMessage({
+                        target: message.invoker,
+                        result: createdNote.result,
+                        error: createdNote.error
+                    });
+                }
             });
         }
     });
-
-    // For some reason, sometimes requests are blocked to localhost due to CORS issues.
 
     class Anki {
         static async ping() {
@@ -40,10 +48,6 @@ try {
             } else {
                 return false;
             }
-
-        }
-
-        static async getDecks() {
 
         }
 
@@ -76,9 +80,9 @@ try {
                             modelName: 'Basic',
                             fields: {
                                 Front: entry.word,
-                                Back: entry.definitions[0].type + ' ' + entry.definitions[0].definition,
-                                Furigana: entry.furigana,
-                                Other: entry.info.join(', '),
+                                Back: entry.definitions.map((def) => `${def.definition}・${def.type}`).join('<br>'),
+                                Furigana: entry.furigana ?? '',
+                                Other: entry.info.join(', ') ?? '',
                                 Example: `${entry.sentence.jp ?? ''}<br>${entry.sentence.en ?? ''}`,
                             },
                             options: {
@@ -95,7 +99,6 @@ try {
                 });
 
                 let responseJson = await posted.json();
-                console.log(responseJson);
                 return responseJson;
 
             }

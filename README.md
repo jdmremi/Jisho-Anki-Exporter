@@ -34,10 +34,6 @@ Note: Once this is available to download through Chrome as an extension, the pre
 
 - Add audio to cards.
 
-- If card creation succeeds, send card ID through socket to frontend and change text of export button to include whether card creation succeeded or not. (✅・❌) an d log to console.
-
-- Add all meanings to card instead of first. Since we're already getting all of the readings from the entries themselves, we just need to format it on the backend. 
-
 # Collaboration
 
 - If you would like to collaborate on this project, feel free to create a pull request, or message me on [Twitter](https://twitter.com/Vezqi) if you have any questions! 

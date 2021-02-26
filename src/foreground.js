@@ -12,20 +12,29 @@ document.querySelectorAll(".concept_light-status").forEach((element, index) => {
 let buttons = document.querySelectorAll(`div[class^='anki-export-button']`);
 
 // This loop is responsible for adding an event listener for all export buttons on the page.
+
 buttons.forEach((button) => {
     button.addEventListener('click', (event) => {
         let button = event.currentTarget;
         let note = new Note(button).getFormatted();
-        console.log(note);
         port.postMessage(note);
     });
 });
 
 port.onMessage.addListener((message) => {
-    console.log(`[Jisho-Anki-Server] ${message}`);
+    let successType = message.error === null ? '✓' : '❌';
+    document.querySelector(`.${message.target}`).innerText = `Export to Anki ${successType}`;
+
+    if(message.error) {
+        console.log(`Unable to create card: ${message.error}`);
+    } else if(message.result) {
+        console.log(`Card successfully created: ${message.result}`);
+    }
+
 });
 
 // Need to figure out how to isolate Note by itself.
+// We can add a method that gets the button's className. That way, we can send it to the server, and then send a message back to the client, GET the button's name and update the text to indicate success/failure.
 class Note {
 
     constructor(button) {
@@ -88,6 +97,10 @@ class Note {
         return furigana;
     }
 
+    getInvoker() {
+        return this._button.className;
+    }
+
     // Should we store these values in fields so that 'this' can reference these fields?
     getFormatted() {
         return {
@@ -97,6 +110,8 @@ class Note {
             audio: this.getAudioUrl(),
             info: this.getInfo(),
             sentence: this.getFirstExample(),
+            invoker: this.getInvoker(),
+            type: 'addNote'
         };
     }
 

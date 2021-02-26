@@ -4,7 +4,11 @@
     "version": "1.0",
     "manifest_version": 2,
     "background": {
-        "scripts": ["./src/background.js", "./src/foreground.js"]
+        "scripts": ["./src/background.js"]
     },
-    "permissions": ["tabs", "storage", "activeTab", "*://jisho.org/*", "*://jisho.org/search/*", "http://*/"]
+    "content_scripts": [{
+        "matches": ["*://jisho.org/*", "*://jisho.org/search/*", "http://*/"],
+        "js": ["./src/foreground.js"]
+    }],
+    "permissions": ["tabs", "activeTab", "*://jisho.org/*", "*://jisho.org/search/*", "http://*/"]
 }
