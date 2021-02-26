@@ -21,8 +21,6 @@ Note: Once this is available to download through Chrome as an extension, the pre
 
 - Sometimes AnkiConnect prevents incoming requests due to some CORS issues. This happens rarely, but if you add `"*"` to `webCorsOriginList` in AnkiConnect's config, then this issue does not persist.
 
-- Sometimes the socket to communicate with Jisho and the extension's server doesn't initialize properly, therefore data is not sent/received sometimes.
-
 - Background is reporting some errors which need to be handled, such as...
     - `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.`
     - `No tab with id: ...`
@@ -30,8 +28,7 @@ Note: Once this is available to download through Chrome as an extension, the pre
 
 # To-do
 
-- Add audio to cards.
-- Fix example sentences.
+    - Nothing for the time being!
 
 # Collaboration
 
