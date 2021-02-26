@@ -69,8 +69,15 @@ try {
         static async createNote(entry) {
             let deckExists = await this.checkForDeck();
             let online = await this.ping();
-            console.log(`Online: ${online}, Exists: ${deckExists}`);
+
             if(deckExists && online) {
+                let audioFileName = entry.audio !== null ? entry.audio.split('/audio')[1] : null,
+                    audioField = entry.audio !== null ? [{
+                        url: entry.audio,
+                        filename: audioFileName,
+                        fields: ['Furigana']
+                    }] : [];
+
                 let body =  {
                     action: 'addNote',
                     version: 6,
@@ -88,7 +95,9 @@ try {
                             options: {
                                 allowDuplicate: false,
                                 duplicateScope: 'deck'
-                            }
+                            },
+                            tags: ['jisho-anki-exporter'],
+                            audio: audioField
                         }
                     }
                 };
