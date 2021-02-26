@@ -23,7 +23,7 @@ buttons.forEach((button) => {
 
 port.onMessage.addListener((message) => {
     let successType = message.error === null ? '✓' : '❌';
-    document.querySelector(`.${message.target}`).innerText = `Export to Anki ${successType}`;
+    document.querySelector(`.${message.target}`).innerHTML = `<a>Export to Anki</a> ${successType}`;
 
     if(message.error) {
         console.log(`Unable to create card: ${message.error}`);
@@ -34,7 +34,7 @@ port.onMessage.addListener((message) => {
 });
 
 // Need to figure out how to isolate Note by itself.
-// We can add a method that gets the button's className. That way, we can send it to the server, and then send a message back to the client, GET the button's name and update the text to indicate success/failure.
+
 class Note {
 
     constructor(button) {
@@ -76,17 +76,25 @@ class Note {
     }
 
     getFirstExample() {
-        return {
-            en: this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]') !== null
-                ? Array.from(this._button.parentElement.parentElement.parentElement
-                       .querySelector('[class^="japanese japanese_gothic clearfix"]').children)
-                       .filter((child) => child.className === 'english')[0].innerText
-                : null,
-            jp: this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]') !== null 
-                ? Array.from(this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]')
-                       .querySelectorAll('span[class^=unlinked]'))
-                       .map((child) => child.innerText).join('') + '。' 
-                : null
+        let hasExamples = this._button.parentElement.parentElement.parentElement.getElementsByClassName('japanese japanese_gothic clearfix').length >= 1 ? true : false;
+        if(hasExamples) {
+            return {
+                en: this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]') !== null
+                    ? Array.from(this._button.parentElement.parentElement.parentElement
+                           .querySelector('[class^="japanese japanese_gothic clearfix"]').children)
+                           .filter((child) => child.className === 'english')[0].innerText
+                    : null,
+                jp: this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]') !== null 
+                    ? Array.from(this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]')
+                           .querySelectorAll('span[class^=unlinked]'))
+                           .map((child) => child.innerText).join('') + '。' 
+                    : null
+            }
+        } else {
+            return {
+                en: null,
+                jp: null
+            }
         }
     }
 
@@ -114,6 +122,4 @@ class Note {
             type: 'addNote'
         };
     }
-
 }
-
