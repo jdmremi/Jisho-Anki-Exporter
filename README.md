@@ -33,6 +33,7 @@ Note: Once this is available to download through Chrome as an extension, the pre
 # To-do
 
 - Add audio to cards.
+- Fix example sentences.
 
 # Collaboration
 
