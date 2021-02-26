@@ -23,8 +23,6 @@ Note: Once this is available to download through Chrome as an extension, the pre
 
 - Sometimes the socket to communicate with Jisho and the extension's server doesn't initialize properly, therefore data is not sent/received sometimes.
 
-- For some entries, if no example sentence exists, it will take the first example sentence on the page, even if it doesn't belong to the target word. 
-
 - Background is reporting some errors which need to be handled, such as...
     - `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.`
     - `No tab with id: ...`
