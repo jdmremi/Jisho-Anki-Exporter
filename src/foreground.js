@@ -91,9 +91,9 @@ class Note {
     }
 
     getFurigana() {
-        let kanjiFurigana = this._button.parentElement.parentElement.querySelector('[class^="furigana"]').innerText;
-        let charsToReplace = this._button.parentElement.parentElement.querySelector('[class^="text"]').firstChild.wholeText.trim();
-        let furigana = charsToReplace.replace(charsToReplace, kanjiFurigana) + this.getWord().replace(charsToReplace, '');
+        let kanjiFurigana = this._button.parentElement.parentElement.querySelector('[class^="furigana"]').innerText,
+            charsToReplace = this._button.parentElement.parentElement.querySelector('[class^="text"]').firstChild.wholeText.trim(),
+            furigana = charsToReplace.replace(charsToReplace, kanjiFurigana) + this.getWord().replace(charsToReplace, '');
         return furigana;
     }
 
