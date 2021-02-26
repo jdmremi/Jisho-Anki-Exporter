@@ -9,7 +9,13 @@
 - Requires [AnkiConnect](https://ankiweb.net/shared/info/2055492159) to be installed as an add-on to Anki.
 - Requires the provided Anki preset deck.
 
-- ...To include further installation instructions
+1) Download the contents of this repository and open the template deck in Anki.
+2) Create a new folder anywhere on your PC, name it whatever you want, and add the `src` directory from the .zip as well as the `manifest.json` file.
+3) Navigate over to `chrome://extensions` and then toggle developer mode, enabling it.
+4) On the left side of the page, click the button indicating "load an unpacked extension". Click this button, and then locate the folder you just created and select it. Once uploaded, it will say that there was an error in the background, which is being looked into.
+5) Head on over to jisho.org, search for a word, export the word to a deck, and it should work! Just make sure Anki is running and that you have AnkiConnect installed! 
+
+Note: Once this is available to download through Chrome as an extension, the previous steps will no longer apply.
 
 # Known Issues
 
