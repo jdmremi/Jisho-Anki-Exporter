@@ -79,16 +79,12 @@ class Note {
         let hasExamples = this._button.parentElement.parentElement.parentElement.getElementsByClassName('japanese japanese_gothic clearfix').length >= 1 ? true : false;
         if(hasExamples) {
             return {
-                en: this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]') !== null
-                    ? Array.from(this._button.parentElement.parentElement.parentElement
+                en: Array.from(this._button.parentElement.parentElement.parentElement
                            .querySelector('[class^="japanese japanese_gothic clearfix"]').children)
-                           .filter((child) => child.className === 'english')[0].innerText
-                    : null,
-                jp: this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]') !== null 
-                    ? Array.from(this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]')
+                           .filter((child) => child.className === 'english')[0].innerText,
+                jp: Array.from(this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]')
                            .querySelectorAll('span[class^=unlinked]'))
                            .map((child) => child.innerText).join('') + '。' 
-                    : null
             }
         } else {
             return {
