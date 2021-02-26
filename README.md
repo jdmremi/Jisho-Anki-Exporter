@@ -6,7 +6,7 @@
 
 # Installation
 
-- Requires [AnkiConnect](https://ankiweb.net/shared/info/2055492159) to be installed as an add-on to Anki.
+- Requires [AnkiConnect](https://ankiweb.net/shared/info/2055492159) to be installed as an add-on in Anki.
 - Requires the provided Anki preset deck.
 
 1) Download the contents of this repository and open the template deck in Anki.
@@ -34,7 +34,9 @@ Note: Once this is available to download through Chrome as an extension, the pre
 
 - Add audio to cards.
 
-- If card creation succeeds, send card ID through socket to frontend and change text of export button to include whether card creation succeeded or not. (✅・❌) an dlog to console.
+- If card creation succeeds, send card ID through socket to frontend and change text of export button to include whether card creation succeeded or not. (✅・❌) an d log to console.
+
+- Add all meanings to card instead of first. Since we're already getting all of the readings from the entries themselves, we just need to format it on the backend. 
 
 # Collaboration
 
