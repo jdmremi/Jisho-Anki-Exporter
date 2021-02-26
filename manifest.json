@@ -1,6 +1,6 @@
 {
     "name": "Jisho-Anki Exporter Rewrite",
-    "description": "Adds an export to Anki feature on jisho.org. **Requires AnkiConnect to be installed as an addon through Anki**",
+    "description": "Adds an Anki export button to entries on jisho.org.",
     "version": "1.0",
     "manifest_version": 2,
     "background": {
