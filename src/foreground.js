@@ -12,7 +12,6 @@ document.querySelectorAll(".concept_light-status").forEach((element, index) => {
 let buttons = document.querySelectorAll(`div[class^='anki-export-button']`);
 
 // This loop is responsible for adding an event listener for all export buttons on the page.
-
 buttons.forEach((button) => {
     button.addEventListener('click', (event) => {
         let button = event.currentTarget;
@@ -36,7 +35,6 @@ port.onMessage.addListener((message) => {
 // Need to figure out how to isolate Note by itself.
 
 class Note {
-
     constructor(button) {
         this._button = button;
         if(!button) {
@@ -45,7 +43,7 @@ class Note {
     }
 
     getWord() {
-        return this._button.parentElement.parentElement.getElementsByClassName('text')[0].innerText
+        return this._button.parentElement.parentElement.getElementsByClassName('text')[0].innerText;
     }
 
     getDefinitions() {
@@ -84,14 +82,15 @@ class Note {
                            .filter((child) => child.className === 'english')[0].innerText,
                 jp: Array.from(this._button.parentElement.parentElement.parentElement.querySelector('[class^="japanese japanese_gothic clearfix"]')
                            .querySelectorAll('span[class^=unlinked]'))
-                           .map((child) => child.innerText).join('') + '。' 
-            }
-        } else {
-            return {
-                en: null,
-                jp: null
+                           .map((child) => child.innerText).join('') + '。'
             }
         }
+        
+        return {
+            en: null,
+            jp: null
+        }
+        
     }
 
     getFurigana() {
